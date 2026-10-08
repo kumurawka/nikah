@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Приглашение на никях</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Amiri&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#1f3a33;--muted:#6b7a74;--green:#1f5d4a;--gold:#b8923f;--line:#e4d9c0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101c18;--card:#17262157;--ink:#f1ead8;--muted:#a3b3ab;--green:#3f9a7d;--gold:#d4ae5c;--line:#2d443c}}
+:root[data-theme="dark"]{--bg:#101c18;--card:#172621;--ink:#f1ead8;--muted:#a3b3ab;--green:#3f9a7d;--gold:#d4ae5c;--line:#2d443c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;display:flex;justify-content:center;padding:24px 16px;
+background-image:radial-gradient(circle at 1px 1px,var(--line) 1px,transparent 0);background-size:22px 22px}
+.card{width:100%;max-width:460px;background:var(--card);border:1px solid var(--gold);outline:1px solid var(--line);outline-offset:6px;border-radius:6px;padding:40px 26px;text-align:center}
+.ar{font-family:Amiri,'Traditional Arabic',serif;font-size:26px;color:var(--gold);margin:0 0 18px;direction:rtl}
+.small{letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--muted);margin:0 0 10px}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:46px;line-height:1.05;margin:10px 0;color:var(--green)}
+h1 span{display:block;font-size:26px;color:var(--gold);margin:4px 0}
+.orn{color:var(--gold);letter-spacing:.5em;margin:18px 0;font-size:14px}
+p{line-height:1.6;margin:8px 0}
+.when{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;margin:6px 0;color:var(--green)}
+.when.sm{font-size:20px}
+.place{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin:22px 0}
+a.map{display:inline-block;margin-top:10px;color:var(--green);border-bottom:1px solid var(--gold);text-decoration:none;font-size:15px}
+input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink);font:inherit;font-size:16px;margin:10px 0}
+.btns{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+button{font:inherit;font-size:16px;padding:14px;border-radius:8px;cursor:pointer;border:1px solid var(--green)}
+.yes{background:var(--green);color:#fff}
+.no{background:transparent;color:var(--green)}
+.hint{font-size:13px;color:var(--muted);margin-top:12px}
+.err{color:#b3402f;font-size:14px;min-height:18px;margin:0}
+</style>
+</head>
+<body>
+<main class="card">
+  <p class="ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+  <p class="small">Приглашение на никях</p>
+  <p>Ассаламу алейкум, дорогие родные и друзья!</p>
+  <h1>Абу Бакр<span>&amp;</span>Рамиля</h1>
+  <p>С радостью приглашаем вас разделить с нами день, когда мы скрепим наш союз никяхом.</p>
+  <div class="orn">✦ ✦ ✦</div>
+  <p class="small">Дата и время</p>
+  <p class="when">19 января 2027, вторник</p>
+  <p class="when sm">Сбор гостей в 14:00</p>
+  <p class="when sm">Никях в 14:30</p>
+  <div class="place">
+    <p class="small">Место</p>
+    <p class="when">Кафе «Финик»</p>
+    <p>г. Бишкек, проспект Чуй, 115</p>
+    <a class="map" id="map" href="#" target="_blank" rel="noopener">Открыть на карте →</a>
+  </div>
+  <p class="small">Подтвердите, пожалуйста, присутствие</p>
+  <p class="err" id="err"></p>
+  <input id="name" type="text" placeholder="Ваше имя" autocomplete="name">
+  <div class="btns">
+    <button class="yes" id="yes">Да, приду, иншаллах 🤲</button>
+    <button class="no" id="no">Простите, не смогу прийти</button>
+  </div>
+  <p class="hint">Ответ придёт нам в WhatsApp. Пожалуйста, ответьте до 5 января.</p>
+  <div class="orn">✦</div>
+  <p>С любовью и уважением,<br>Абу Бакр и Рамиля</p>
+</main>
+<script>
+var ADDRESS="кафе Финик, проспект Чуй 115, Бишкек";
+var PHONE="996553140419";
+document.getElementById("map").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(ADDRESS);
+function send(ok){
+  var n=document.getElementById("name").value.trim();
+  if(!n){document.getElementById("err").textContent="Пожалуйста, напишите ваше имя";return;}
+  document.getElementById("err").textContent="";
+  var t=ok?("Ассаламу алейкум! Это "+n+". Приду на никях, иншаллах 🤲"):("Ассаламу алейкум! Это "+n+". Простите, к сожалению, не смогу прийти. Поздравляю вас и желаю баракята!");
+  window.open("https://wa.me/"+PHONE+"?text="+encodeURIComponent(t),"_blank");
+}
+document.getElementById("yes").onclick=function(){send(true)};
+document.getElementById("no").onclick=function(){send(false)};
+</script>
+</body>
+</html>
